@@ -1,0 +1,12 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+
+    
+    
+    {% for order in orders %}
+        <article class="order">
+            <h2>{{ order }}</h2>
+    {% endfor %}
+
+{% endblock content %}

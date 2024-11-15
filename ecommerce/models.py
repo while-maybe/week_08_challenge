@@ -13,4 +13,4 @@ class Order(models.Model):
         verbose_name_plural = 'Orders'
     
     def __str__(self):
-        return f"{self.customer_name} ordered {self.quantity}X {self.product_name} on {self.order_date}"
+        return f"{self.customer_name.title()} ordered {self.quantity}X {self.product_name} on {self.order_date}"
