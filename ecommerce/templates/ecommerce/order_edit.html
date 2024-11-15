@@ -1,0 +1,37 @@
+{% extends 'ecommerce/base.html' %}
+
+{% block content %}
+    <h2>{% if order.id %}Editing "{{ order }}"{% else %}Create new order{% endif %}</h2>
+
+    {% if order %}
+
+        <form action="{% url 'ecommerce:order_edit' order_id=order.id %}" method="POST" class="task-form">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="save btn btn-success">Save</button>
+        </form>
+
+        <!-- cancel button -->
+        <form action="{% url 'ecommerce:order_detail' order_id=order.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Cancel</button>
+        </form>
+
+    {% else %}
+
+        <form action="{% url 'ecommerce:order_new' %}" method="POST" class="task-form">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="save btn btn-success">Save</button>
+        </form>
+
+        <!-- cancel button -->
+        <form action="{% url 'ecommerce:order_list' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Cancel</button>
+        </form>
+
+    {% endif %}
+
+
+{% endblock content %}
