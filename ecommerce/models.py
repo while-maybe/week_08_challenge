@@ -10,6 +10,7 @@ class Order(models.Model):
     
     class Meta:
         ordering = ['-order_date']
+        verbose_name_plural = 'Orders'
     
     def __str__(self):
         return f"{self.customer_name} ordered {self.quantity}X {self.product_name} on {self.order_date}"
