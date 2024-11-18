@@ -8,7 +8,7 @@ from . import views
 app_name = 'ecommerce'
 
 urlpatterns = [
-    # path('', RedirectView.as_view(pattern_name='order_list')),
+    path('', views.forwarder, name='forwarder'),
     path('orders/', views.order_list, name='order_list'), # URL to list tasks
     path('order/delete/<int:order_id>/', views.order_delete, name='order_delete'),
     path('order/edit/<int:order_id>/', views.order_edit, name='order_edit'),

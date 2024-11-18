@@ -5,6 +5,10 @@ from .models import Order
 
 # Create your views here.
 
+# '/' forwarder
+def forwarder(request):
+    return redirect('ecommerce:order_list')
+
 # list orders
 def order_list(request):
     orders = Order.objects.all()
@@ -16,6 +20,7 @@ def order_new(request):
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
+            # form['order_date'] = form['order_date'].strftime('%Y-%m-%d')
             form.save()
             return redirect('ecommerce:order_list')
     else:
