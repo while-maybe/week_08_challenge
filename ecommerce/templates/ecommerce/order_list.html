@@ -1,23 +1,34 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
+<div class="d-flex gap-3">
 
     {% for order in orders %}
-        <div class="container d-flex gap-2">
 
-            <h2 class="order">{{ order }}</h2>
-            
-            <form action="{% url 'ecommerce:order_edit' order_id=order.id %}" method="GET">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-warning">Edit</button>
-            </form>
+    <div class="card text-center mb-3" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Order #{{ order.id }}</h5>
+            <p class="card-text text-center fw-bold mb-5 fs-4">{{ order.customer_name }}</p>
+            <p class="card-text text-start mb-1 fs-5">{{ order.quantity }}X {{ order.product_name }}</p>
+            <p class="card-text text-start fs-6">{{ order.order_date }}</p>
 
-            <form action="{% url 'ecommerce:order_delete' order_id=order.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+            <div class="container d-flex justify-content-around gap-2">
+                <!-- <h2 class="order">{{ order }}</h2> -->
+
+                <form action="{% url 'ecommerce:order_edit' order_id=order.id %}" method="GET">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning">Edit</button>
+                </form>
+
+                <form action="{% url 'ecommerce:order_delete' order_id=order.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+
         </div>
-
+    </div>
     {% endfor %}
 
+</div>
 {% endblock content %}

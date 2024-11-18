@@ -26,14 +26,17 @@ def order_new(request):
 # Edit order
 def order_edit(request, order_id):
     order = get_object_or_404(Order, id=order_id)
+    
     if request.method == "POST":
-        form = OrderForm(request.POST, instance=order)
+        form = OrderForm(data=request.POST, instance=order)
         if form.is_valid():
             form.save()
             return redirect('ecommerce:order_list')
     else:
         form = OrderForm(instance=order)
-    return render(request, 'ecommerce/order_edit.html', {'form': form})
+
+    context = {'form': form, 'order': order}
+    return render(request, 'ecommerce/order_edit.html', context)
 
 # Delete order
 def order_delete(request, order_id):
