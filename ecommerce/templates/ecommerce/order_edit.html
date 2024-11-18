@@ -1,25 +1,61 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
-<h2>{% if order.id %}Editing "{{ order }}"{% else %}Create new order{% endif %}</h2>
+<h2>{% if order.id %}Editing order{% else %}Create new order{% endif %}</h2>
 
 {% if order %}
 
-
-
-<form action="{% url 'ecommerce:order_edit' order_id=order.id %}" method="POST" class="task-form">
+<form action="{% url 'ecommerce:order_edit' order_id=order.id %}" method="POST" class="order-form">
   {% csrf_token %}
-  {{ form }}
+
+  <div class="mb-3 row">
+    <label for="order_number" class="col-sm-2 col-form-label">Order #</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="order_number" value="{{ order.id }}">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="customer" class="col-sm-2 col-form-label">Customer</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="customer" name="customer_name" value="{{ order.customer_name }}">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="quantity" name="quantity" value="{{ order.quantity }}">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="productName" class="col-sm-2 col-form-label">Product</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="productName" name="product_name" value="{{ order.product_name }}">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for="orderDate" class="col-sm-2 col-form-label">Order Date</label>
+    <div class="col-sm-10">
+      <input type="date" class="form-control" id="orderDate" name="order_date"
+        value="{{ order.order_date|date:'Y-m-d' }}">
+    </div>
+  </div>
+
+  <!-- {{ form }} -->
   <div class="container d-flex gap-2">
-    <button type="submit" class="save btn btn-success">Save</button>
-</form>
+      <button type="submit" class="save btn btn-success">Save</button>
+      {{form.errors}}
+  </form>
 
-<!-- cancel button -->
-<form action="{% url 'ecommerce:order_list' %}" method="POST">
-  {% csrf_token %}
-  <button type="submit" class="btn btn-danger">Cancel</button>
-</form>
-</div>
+  <!-- cancel button -->
+  <form action="{% url 'ecommerce:order_list' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Cancel</button>
+  </form>
+  </div>
 
 {% else %}
 <form action="{% url 'ecommerce:order_new' %}" method="POST" class="task-form">

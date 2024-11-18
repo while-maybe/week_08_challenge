@@ -35,6 +35,7 @@ def order_edit(request, order_id):
     if request.method == "POST":
         form = OrderForm(data=request.POST, instance=order)
         if form.is_valid():
+            print(form)
             form.save()
             return redirect('ecommerce:order_list')
     else:
