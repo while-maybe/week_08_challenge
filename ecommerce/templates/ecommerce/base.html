@@ -14,13 +14,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{% static 'css/ecommerce.css' %}">
     </head>
-    <body class="d-flex flex-column align-items-center justify-content-between vh-100 py-4"  data-bs-theme="dark">
-        <header class="">
-            <h1>Ecommerce website: buy the stuff!</h1>
+    <body class="d-flex flex-column align-items-center justify-content-between vh-100 pb-4"  data-bs-theme="dark">
+        <header class="d-flex align-items-center justify-content-center w-100">
+            <h1>Ecommerce website: buy stuff!</h1>
 
         </header>
 
-        <main class="">
+        <main class="container-fluid">
             {% block content %}
             {% endblock content%}
         </main>

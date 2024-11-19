@@ -1,18 +1,18 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
-<div class="d-flex gap-3">
+<div class="d-flex gap-3 flex-wrap justify-content-center">
 
     {% for order in orders %}
 
-    <div class="card text-center mb-3" style="width: 18rem;">
+    <div class="card text-center mb-3" style="width: 19rem;">
         <div class="card-body">
             <h5 class="card-title">Order #{{ order.id }}</h5>
             <p class="card-text text-center fw-bold mb-5 fs-4">{{ order.customer_name }}</p>
             <p class="card-text text-start mb-1 fs-5">{{ order.quantity }}X {{ order.product_name }}</p>
             <p class="card-text text-start fs-6">{{ order.order_date|date:'d/m/Y' }}</p>
 
-            <div class="container d-flex justify-content-around gap-2">
+            <div class="d-flex justify-content-around gap-2">
                 <!-- <h2 class="order">{{ order }}</h2> -->
 
                 <form action="{% url 'ecommerce:order_edit' order_id=order.id %}" method="GET">
