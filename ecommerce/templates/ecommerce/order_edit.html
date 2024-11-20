@@ -1,7 +1,7 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
-<h2 class="text-center mb-5">{% if order.id %}Edit order{% else %}Create new order{% endif %}</h2>
+<h1 class="text-center mb-5">{% if order.id %}Edit order{% else %}New order{% endif %}</h1>
     <div class="row text-end mx-md-auto my-form-medium">
 
         {% if order %}

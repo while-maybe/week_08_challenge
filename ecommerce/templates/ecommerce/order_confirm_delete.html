@@ -1,16 +1,9 @@
 {% extends 'ecommerce/base.html' %}
 
 {% block content %}
-{% if orders %}
-    <h1 class="text-center">Order anything!</h1>
-    <br>
-{% else %}
-    <h1 class="text-center">There are no orders yet...</h1>
-    <br>
-{% endif %}
+<h1 class="text-center">Are you sure?</h1>
+<br>
 <div class="d-flex gap-3 flex-wrap justify-content-center">
-
-    {% for order in orders %}
 
     <div class="card text-center mb-3" style="width: 19rem;">
         <div class="card-body">
@@ -20,22 +13,20 @@
             <p class="card-text text-start fs-6">{{ order.order_date|date:'d/m/Y' }}</p>
 
             <div class="d-flex justify-content-around gap-2">
-                <!-- <h2 class="order">{{ order }}</h2> -->
-
-                <form action="{% url 'ecommerce:order_edit' order_id=order.id %}" method="GET">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-warning">Edit</button>
-                </form>
-
-                <form action="{% url 'ecommerce:order_confirm_delete' order_id=order.id %}" method="GET">
+                <form action="{% url 'ecommerce:order_confirm_delete' order_id=order.id %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+
+                <form action="{% url 'ecommerce:order_list' %}" method="GET">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary">Cancel</button>
                 </form>
             </div>
 
         </div>
     </div>
-    {% endfor %}
+    
 
 </div>
 {% endblock content %}
